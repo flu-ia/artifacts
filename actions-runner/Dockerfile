@@ -37,6 +37,9 @@ RUN install -m 0755 -d /etc/apt/keyrings \
     docker-compose-plugin \
     && rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install --no-cache-dir \
+    ansible
+
 RUN usermod -aG docker runner
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
