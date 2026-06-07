@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     iptables \
     openssh-client \
     sudo \
+    python3 \
+    python3-pip \
+    sshpass \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p -m 0755 /etc/apt/keyrings \
@@ -37,8 +40,7 @@ RUN install -m 0755 -d /etc/apt/keyrings \
     docker-compose-plugin \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --no-cache-dir \
-    ansible
+RUN pip3 install --break-system-packages --no-cache-dir ansible
 
 RUN usermod -aG docker runner
 
