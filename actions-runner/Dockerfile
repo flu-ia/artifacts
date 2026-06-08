@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     ca-certificates \
     gnupg \
-    iptables \
     openssh-client \
     sudo \
     python3 \
@@ -33,20 +32,11 @@ RUN install -m 0755 -d /etc/apt/keyrings \
     && chmod a+r /etc/apt/keyrings/docker.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
     && apt-get update && apt-get install -y --no-install-recommends \
-    docker-ce \
     docker-ce-cli \
-    containerd.io \
     docker-buildx-plugin \
     docker-compose-plugin \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --break-system-packages --no-cache-dir ansible
 
-RUN usermod -aG docker runner
-
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
 USER runner
-
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
