@@ -39,4 +39,5 @@ RUN install -m 0755 -d /etc/apt/keyrings \
 
 RUN pip3 install --break-system-packages --no-cache-dir ansible
 
+RUN groupadd -f docker && usermod -aG docker runner
 USER runner
