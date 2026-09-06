@@ -6,6 +6,13 @@ on:
       - main
     paths:
       - "actions-runner/**"
+  schedule:
+    # Rebuild semanal: la base ghcr.io/actions/actions-runner:latest
+    # se actualiza seguido y GitHub depreca runners viejos.
+    # Sin esto la imagen se estanca y los jobs fallan con
+    # "Runner version X is deprecated".
+    - cron: "0 3 * * 0"
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
