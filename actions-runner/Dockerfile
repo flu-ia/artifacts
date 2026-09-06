@@ -1,4 +1,5 @@
 FROM ghcr.io/actions/actions-runner:latest
+# Rebuild forzado 2026-09-06: refrescar base (runner deprecado v2.334.0 -> actual).
 
 USER root
 
